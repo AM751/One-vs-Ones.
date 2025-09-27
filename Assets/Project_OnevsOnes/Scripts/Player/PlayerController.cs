@@ -24,12 +24,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed * Time.deltaTime, _rigidbody2D.linearVelocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
         
        //Jump Input:
        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) && _isGrounded)
        {
-           _rigidbody2D.linearVelocity = Vector2.up * playerJumpForce * Time.deltaTime;
+           _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
        }
     }
 
