@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        Time.timeScale = 1;
     }
     void Start()
     {
