@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,12 +7,13 @@ public class GamePause : MonoBehaviour
     
     [SerializeField] public Canvas gamePauseCanvas;
     public bool isPaused = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         gamePauseCanvas.enabled = false;
     }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +27,7 @@ public class GamePause : MonoBehaviour
             {
                 PauseGame();
             }
+            
         }
     }
 
@@ -41,7 +44,6 @@ public class GamePause : MonoBehaviour
         Time.timeScale = 1;
         isPaused = false;
     }
-
     public void MainMenu()
     {
         SceneManager.LoadScene("UI_MainMenu");
