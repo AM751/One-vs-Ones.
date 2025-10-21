@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project_OnevsOnes/Scenes/GamePlayScenes/GPS_Lvl1.unity
     guid: 7f63cffcfc95d46c0b2a64ecae44fa1f
+  - enabled: 1
+    path: Assets/Project_OnevsOnes/Scenes/UI_Scenes/UI_GameEnd.unity
+    guid: fc8fabd63722c42c384757ce9ee78c8a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

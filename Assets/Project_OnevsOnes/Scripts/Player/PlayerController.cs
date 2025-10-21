@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
         
        //Jump Input:
-       if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) && _isGrounded)
+       if (Input.GetKeyDown(KeyCode.W) && _isGrounded)
        {
            _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
        }
