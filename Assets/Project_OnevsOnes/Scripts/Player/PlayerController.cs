@@ -1,5 +1,7 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,11 +13,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask _groundLayer;
-    
+    private InputSystem_Actions _inputActions;
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         Time.timeScale = 1;
+    }
+
+    void OnEnable()
+    {
+        _inputActions = new InputSystem_Actions();
+        _inputActions.Player.Jump.performed += Jump;
+        
+        _inputActions.Enable();
+
+    }
+
+    private void OnDisable()
+    {
+        _inputActions.Player.Jump.performed -= Jump;
+        _inputActions.Disable();
+    }
+
+    void Jump(InputAction.CallbackContext context)
+    {
+        if (_isGrounded)
+        {
+            Debug.Log("Jump!");
+        }
     }
     void Start()
     {
@@ -28,9 +53,9 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
         
        //Jump Input:
-       if (Input.GetKeyDown(KeyCode.W) && _isGrounded)
+       if (Input.GetButtonDown("Jump") && _isGrounded)//Input.GetKeyDown(KeyCode.W) && _isGrounded))
        {
-           _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
+           //_rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
        }
     }
 
