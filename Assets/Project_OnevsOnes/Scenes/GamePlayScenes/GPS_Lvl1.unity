@@ -456,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!68 &350086612
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -527,7 +527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783f7a98d3d534236a992dbd836f0de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 486527976}
 --- !u!1 &355085214
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,9 +699,10 @@ GameObject:
   - component: {fileID: 486527978}
   - component: {fileID: 486527977}
   - component: {fileID: 486527981}
+  - component: {fileID: 486527982}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -870,6 +870,18 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &486527982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486527976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de310431f579492cb799e682c5a7207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &647438413
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647438414}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: GroundCheck- Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1787,9 +1799,10 @@ GameObject:
   - component: {fileID: 1169578966}
   - component: {fileID: 1169578965}
   - component: {fileID: 1169578964}
+  - component: {fileID: 1169578968}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1938,6 +1951,25 @@ Transform:
   - {fileID: 647438414}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1169578968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169578963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92aecb8b0a2548acbe60421780e48c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMoveSpeed: 6
+  playerJumpForce: 0
+  _groundCheck: {fileID: 647438414}
+  _groundCheckRadius: 0.2
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1182530331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,7 +2380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1722798665}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: GroundCheck- Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

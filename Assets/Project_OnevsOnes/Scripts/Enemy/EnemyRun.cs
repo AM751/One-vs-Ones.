@@ -26,11 +26,6 @@ public class EnemyRun : MonoBehaviour
     {
         _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
         
-        //Enemy's Jump Input has to be modified here:
-        // if (Input.GetKeyDown(KeyCode.W) && _isGrounded)
-        // {
-        //     _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
-        // }
     }
 
     void FixedUpdate()
