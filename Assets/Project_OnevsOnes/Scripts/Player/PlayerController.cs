@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.Player.Jump.performed += Jump;
-        
         _inputActions.Enable();
 
     }
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded)
         {
-            Debug.Log("Jump!");
+            _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
         }
     }
     void Start()
@@ -51,12 +50,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
-        
-       //Jump Input:
-       if (Input.GetButtonDown("Jump") && _isGrounded)//Input.GetKeyDown(KeyCode.W) && _isGrounded))
-       {
-           //_rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
-       }
     }
 
     void FixedUpdate()
