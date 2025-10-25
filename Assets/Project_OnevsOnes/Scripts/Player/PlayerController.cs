@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float playerMoveSpeed;
     [SerializeField] public float playerJumpForce;
+    [SerializeField] public float sprintSpeed;
+    [SerializeField] public float maxSprintSpeed;
+    //[SerializeField] public float sprintDeceleration;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
     
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.Player.Jump.performed += Jump;
+        _inputActions.Player.Sprint.performed += Sprint;
         _inputActions.Enable();
 
     }
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         _inputActions.Player.Jump.performed -= Jump;
+        _inputActions.Player.Sprint.performed -= Sprint;
         _inputActions.Disable();
     }
 
@@ -40,6 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
         }
+    }
+
+    void Sprint(InputAction.CallbackContext context)
+    {
+        playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
     }
     void Start()
     {
