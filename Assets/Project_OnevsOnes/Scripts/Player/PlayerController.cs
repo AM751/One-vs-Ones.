@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float sprintSpeed;
     [SerializeField] public float maxSprintSpeed;
     //[SerializeField] public float sprintDeceleration;
+    [SerializeField] public AudioClip sprintAudio;
+    public AudioSource audioSource;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
     
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
     }
 
@@ -50,6 +53,10 @@ public class PlayerController : MonoBehaviour
     void Sprint(InputAction.CallbackContext context)
     {
         playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
+        if (audioSource != null && sprintAudio != null)
+        {
+            audioSource.PlayOneShot(sprintAudio);
+        }
     }
     void Start()
     {
