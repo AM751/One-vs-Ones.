@@ -792,6 +792,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _playerJumpEffect: {fileID: 0}
 --- !u!114 &486527982
 MonoBehaviour:
   m_ObjectHideFlags: 0
