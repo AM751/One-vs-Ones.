@@ -70,6 +70,9 @@ public class PlayerController : MonoBehaviour
             sprintAudioSource.PlayOneShot(sprintAudio);
         }
     }
+
+    
+
     void Start()
     {
         //playerMoveSpeed = 0f;
