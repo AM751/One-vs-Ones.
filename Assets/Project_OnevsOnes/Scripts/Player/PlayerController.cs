@@ -71,7 +71,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Obstacles"))
+        {
+            playerMoveSpeed = -1f;
+        }
+    }
 
     void Start()
     {
