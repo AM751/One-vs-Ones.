@@ -60,8 +60,12 @@ public class PlayerController : MonoBehaviour
 
     void Sprint(InputAction.CallbackContext context)
     {
-        playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
-        if (sprintAudioSource != null && sprintAudio != null)
+        if (_isGrounded)
+        {
+            playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
+        }
+        
+        if (sprintAudioSource != null && sprintAudio != null && _isGrounded)
         {
             sprintAudioSource.PlayOneShot(sprintAudio);
         }
