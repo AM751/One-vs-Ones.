@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float maxSprintSpeed;
     //[SerializeField] public float sprintDeceleration;
     [SerializeField] public AudioClip sprintAudio;
-    public AudioSource audioSource;
+    [SerializeField] public AudioClip jumpAudio;
+    public AudioSource sprintAudioSource;
+    public AudioSource jumpAudioSource;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
     
@@ -22,7 +24,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
+        sprintAudioSource = GetComponent<AudioSource>();
+        jumpAudioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
     }
 
@@ -44,18 +47,23 @@ public class PlayerController : MonoBehaviour
 
     void Jump(InputAction.CallbackContext context)
     {
-        if (_isGrounded)
+        if (_isGrounded )
         {
             _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
+        }
+
+        if (jumpAudioSource != null && jumpAudio != null && _isGrounded)
+        {
+            jumpAudioSource.PlayOneShot(jumpAudio);
         }
     }
 
     void Sprint(InputAction.CallbackContext context)
     {
         playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
-        if (audioSource != null && sprintAudio != null)
+        if (sprintAudioSource != null && sprintAudio != null)
         {
-            audioSource.PlayOneShot(sprintAudio);
+            sprintAudioSource.PlayOneShot(sprintAudio);
         }
     }
     void Start()
