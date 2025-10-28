@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacles"))
         {
-            playerMoveSpeed = -1f;
+            playerMoveSpeed = -5;
         }
     }
 

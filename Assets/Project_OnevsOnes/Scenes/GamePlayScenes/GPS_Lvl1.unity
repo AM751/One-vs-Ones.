@@ -793,7 +793,7 @@ MonoBehaviour:
   playerMoveSpeed: 3
   playerJumpForce: 7
   sprintSpeed: 2
-  maxSprintSpeed: 6
+  maxSprintSpeed: 8
   sprintAudio: {fileID: 8300000, guid: 5159066c65eb242b1b97621ceb5fefd1, type: 3}
   jumpAudio: {fileID: 8300000, guid: a58d9c9d10971408f8e9575dfef0f24b, type: 3}
   sprintAudioSource: {fileID: 486527983}
