@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float playerJumpForce;
     [SerializeField] public float sprintSpeed;
     [SerializeField] public float maxSprintSpeed;
-    //[SerializeField] public float sprintDeceleration;
     
     [Header("Audio Zone.")]
     [SerializeField] public AudioClip sprintAudio;
@@ -32,13 +31,6 @@ public class PlayerController : MonoBehaviour
     
     [Header("Effects.")]
     [SerializeField] private ParticleSystem _playerJumpEffect;
-    // [SerializeField] private Transform _playerJumpVisual;
-    // [SerializeField] private float _playerJumpEffectDuration;
-    // [SerializeField] private Vector2 _squashScale = new Vector2(1.2f, 0.8f);
-    // [SerializeField] private Vector2 _stretchScale = new Vector2(0.8f, 1.2f);
-    //
-    // private Vector2 _originalVisualScale;
-    // private Coroutine _squashStretchCoroutine;
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -102,30 +94,12 @@ public class PlayerController : MonoBehaviour
             playerMoveSpeed = -5;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
-    }
-
     void FixedUpdate()
     {
-        // bool playerGrounded = _isGrounded;
+        //For the Player to check the ground platform:
         _isGrounded = Physics2D.OverlapCircle (_groundCheck.position, _groundCheckRadius, _groundLayer);
-        // if (playerGrounded && !_isGrounded)
-        // {
-        //     if (_playerJumpEffect != null)
-        //     {
-        //         _playerJumpEffect.enabled = true;
-        //     }
-        //     else if (!playerGrounded && _isGrounded)
-        //     {
-        //         if (_playerJumpEffect != null)
-        //         {
-        //             _playerJumpEffect.enabled = false;
-        //         }
-        //     }
-        // }
+        
+        //For the Player to continue the Auto-Run throughout the game:
+        _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
     }
 }
