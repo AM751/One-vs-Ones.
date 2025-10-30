@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _playerCollidedParticles;
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (_playerCollidedParticles != null && other.gameObject.CompareTag("Obstacles"))
-        {
-            Vector2 collidingPoint = other.GetContact(0).point;
-            
-            Instantiate(_playerCollidedParticles, collidingPoint, Quaternion.identity);
-        }
-    }
+    // [Header("Player Particle Effect.")]
+    // [SerializeField] private ParticleSystem _playerCollidedParticles;
+    //
+    // // [Header("Player Particle Effect Obstacle.")]
+    // // [SerializeField] private GameObject _obstacleObject;
+    //
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.TryGetComponent<Obstacle> (out Obstacle obstacle))
+    //     {
+    //         Vector2 collidingObstacle = other.GetContact(0).point;
+    //         
+    //         Instantiate(_playerCollidedParticles, collidingObstacle, Quaternion.identity);
+    //     }
+    // }
 }
