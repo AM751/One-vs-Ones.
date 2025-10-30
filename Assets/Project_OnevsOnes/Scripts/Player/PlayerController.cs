@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,11 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float sprintSpeed;
     [SerializeField] public float maxSprintSpeed;
     
-    [Header("Audio Zone.")]
-    [SerializeField] public AudioClip sprintAudio;
-    [SerializeField] public AudioClip jumpAudio;
-    public AudioSource sprintAudioSource;
-    public AudioSource jumpAudioSource;
+    // [Header("Audio Zone.")]
+    // [SerializeField] public AudioClip sprintAudio;
+    // [SerializeField] public AudioClip jumpAudio;
+    // public AudioSource sprintAudioSource;
+    // public AudioSource jumpAudioSource;
     
     [Header("Player Components.")]
     private Rigidbody2D _rigidbody2D;
@@ -34,9 +32,6 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        sprintAudioSource = GetComponent<AudioSource>();
-        jumpAudioSource = GetComponent<AudioSource>();
-        Time.timeScale = 1;
     }
 
     void OnEnable()
@@ -60,12 +55,7 @@ public class PlayerController : MonoBehaviour
         if (_isGrounded)
         {
             _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
-            
-        }
-
-        if (jumpAudioSource != null && jumpAudio != null && _isGrounded)
-        {
-            jumpAudioSource.PlayOneShot(jumpAudio);
+            PlayerAudio.Instance.playSoundOnJump();
         }
 
         if (_playerJumpEffect != null)
@@ -79,12 +69,9 @@ public class PlayerController : MonoBehaviour
         if (_isGrounded)
         {
             playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
+            PlayerAudio.Instance.playSoundOnSprint();
         }
         
-        if (sprintAudioSource != null && sprintAudio != null && _isGrounded)
-        {
-            sprintAudioSource.PlayOneShot(sprintAudio);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

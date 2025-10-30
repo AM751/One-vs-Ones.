@@ -12,8 +12,8 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject == _player)
         {
             Vector2 collidingObstacle = other.GetContact(0).point;
-            
             Instantiate(_playerCollidedParticles, collidingObstacle, Quaternion.identity);
+            PlayerAudio.Instance.playSoundOnObjectCollide();
         }
     }
 }
