@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using Random = System.Random;
 
 public class Obstacle : MonoBehaviour
 {
-    [Header("Player Object.")] [SerializeField]
-    private GameObject _player;
+    [Header("Player Damage")]
+    [SerializeField] private GameObject _player;
+    [SerializeField] private int _obstacleDamageTaken;
     
     [Header("Player Particle Effect.")]
     [SerializeField] private ParticleSystem _playerCollidedParticles; 
@@ -12,7 +15,8 @@ public class Obstacle : MonoBehaviour
     [Header("Player Knockback Instruction.")]
     [SerializeField] private Canvas _playerKnockbackInstructionCanvas;
     private bool _isPlayerKnockedBackInstructionActive = false;
-
+    
+    
 
     private void Start()
     {
@@ -21,6 +25,7 @@ public class Obstacle : MonoBehaviour
             _playerKnockbackInstructionCanvas.enabled = false;
         }
     }
+    
 
     private void Update()
     {
@@ -42,6 +47,18 @@ public class Obstacle : MonoBehaviour
             PlayerAudio.Instance.playSoundOnObjectCollide();
             KnockBackInstructionEnable();
         }
+
+        //For Health UI update:
+        if (other.gameObject == _player)
+        {
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+
+            //For taking the damage:
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(_obstacleDamageTaken);
+            }
+        }
     }
 
     private void KnockBackInstructionEnable()
@@ -61,4 +78,5 @@ public class Obstacle : MonoBehaviour
             _isPlayerKnockedBackInstructionActive = false;
         }
     }
+    
 }
