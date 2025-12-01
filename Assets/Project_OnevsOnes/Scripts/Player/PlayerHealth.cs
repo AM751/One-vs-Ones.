@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
     [SerializeField] private int _currentHealth;
     [SerializeField] private float _damage;
+    [SerializeField] public Canvas gameEndCanvas;
     
     [Header("Player Obstacle")]
     [SerializeField] private GameObject _playerObstacle;
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         _currentHealth = _maxHealth;
+        gameEndCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -29,8 +31,8 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage();
             HealthUpdate();
-            //playerDamageText.text = $"HEALTH: {_currentHealth}";
         }
+        
     }
 
     private void TakeDamage()
@@ -56,7 +58,8 @@ public class PlayerHealth : MonoBehaviour
 
           if (_currentHealth == 0)
           {
-              Debug.Log("Dei, Avan sethutan da!!!");
+              gameEndCanvas.enabled = true;
+              Time.timeScale = 0;
           }
      }
      
