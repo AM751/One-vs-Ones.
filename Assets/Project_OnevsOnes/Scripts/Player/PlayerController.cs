@@ -9,15 +9,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float sprintSpeed;
     [SerializeField] public float maxSprintSpeed;
     
-    // [Header("Audio Zone.")]
-    // [SerializeField] public AudioClip sprintAudio;
-    // [SerializeField] public AudioClip jumpAudio;
-    // public AudioSource sprintAudioSource;
-    // public AudioSource jumpAudioSource;
     
     [Header("Player Components.")]
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
+    private SpriteRenderer _spriteRenderer;
+   // private Color _defaultColor;
+    
+    [Header("System Feedback Visuals.")]
+   // [SerializeField] private Color _sprintColor;
     
     [Header ("Ground Check Zone.")]
     [SerializeField] private Transform _groundCheck;
@@ -32,13 +32,20 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        
+        // _spriteRenderer = GetComponent<SpriteRenderer>();
+        // if (_spriteRenderer == null)
+        // {
+        //    // _defaultColor = _spriteRenderer.color;
+        // }
     }
 
     void OnEnable()
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.Player.Jump.performed += Jump;
-        _inputActions.Player.Sprint.performed += Sprint;
+        _inputActions.Player.Sprint.performed += Sprinting;
+        //_inputActions.Player.Sprint.performed += NotSprinting;
         _inputActions.Enable();
 
     }
@@ -46,7 +53,8 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         _inputActions.Player.Jump.performed -= Jump;
-        _inputActions.Player.Sprint.performed -= Sprint;
+        _inputActions.Player.Sprint.performed -= Sprinting;
+        //_inputActions.Player.Sprint.performed -= NotSprinting;
         _inputActions.Disable();
     }
 
@@ -64,15 +72,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Sprint(InputAction.CallbackContext context)
+    void Sprinting(InputAction.CallbackContext context)
     {
         if (_isGrounded)
         {
             playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
             PlayerAudio.Instance.playSoundOnSprint();
+
+            // if (_spriteRenderer != null)
+            // {
+            //     _spriteRenderer.color = _sprintColor;
+            // }
         }
         
     }
+
+    // void NotSprinting(InputAction.CallbackContext context)
+    // {
+    //     if (_spriteRenderer != null)
+    //     {
+    //         _spriteRenderer.color = _defaultColor;
+    //     }
+    // }
 
     private void OnCollisionEnter2D(Collision2D other)
     {

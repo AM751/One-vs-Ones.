@@ -1139,6 +1139,7 @@ MonoBehaviour:
   playerJumpForce: 7
   sprintSpeed: 2
   maxSprintSpeed: 8
+  _sprintColor: {r: 0, g: 0, b: 0, a: 0}
   _groundCheck: {fileID: 1722798665}
   _groundCheckRadius: 0.2
   _groundLayer:
@@ -1494,7 +1495,7 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 100
   _damage: 5
-  gameEndCanvas: {fileID: 0}
+  gameEndCanvas: {fileID: 814989723}
   _playerObstacle: {fileID: 877185459}
   playerDamageText: {fileID: 2055876011}
 --- !u!1 &504177074
@@ -4901,7 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 486527976}
-  _obstacleDamageTaken: 50
+  _obstacleDamageTaken: 5
   _playerCollidedParticles: {fileID: 1728395288471904285, guid: bfca0b97ae2b1450bbc6ef5612d25a05, type: 3}
   _playerKnockbackInstructionCanvas: {fileID: 1225988281}
 --- !u!1 &1896382738
