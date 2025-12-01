@@ -1139,7 +1139,6 @@ MonoBehaviour:
   playerJumpForce: 7
   sprintSpeed: 2
   maxSprintSpeed: 8
-  _sprintColor: {r: 0, g: 0, b: 0, a: 0}
   _groundCheck: {fileID: 1722798665}
   _groundCheckRadius: 0.2
   _groundLayer:
