@@ -1,23 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Movement.")]
-    [SerializeField] public float playerMoveSpeed;
-    [SerializeField] public float playerJumpForce;
-    [SerializeField] public float sprintSpeed;
-    [SerializeField] public float maxSprintSpeed;
+    [SerializeField] private float _playerMoveSpeed;
+    [SerializeField] private float _playerJumpForce;
+    [SerializeField] private float _sprintSpeed;
+    [SerializeField] private float _maxSprintSpeed;
+    [SerializeField] private float _sprintSeconds;
     
     
     [Header("Player Components.")]
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
     private SpriteRenderer _spriteRenderer;
-   // private Color _defaultColor;
+    private Color _defaultColor;
     
     [Header("System Feedback Visuals.")]
-   // [SerializeField] private Color _sprintColor;
+    [SerializeField] private Color _sprintColor;
     
     [Header ("Ground Check Zone.")]
     [SerializeField] private Transform _groundCheck;
@@ -29,15 +32,18 @@ public class PlayerController : MonoBehaviour
     
     [Header("Effects.")]
     [SerializeField] private ParticleSystem _playerJumpEffect;
+
+    private Coroutine _sprintCoroutine;
+    private float _currentMoveSpeed;
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        
-        // _spriteRenderer = GetComponent<SpriteRenderer>();
-        // if (_spriteRenderer == null)
-        // {
-        //    // _defaultColor = _spriteRenderer.color;
-        // }
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _defaultColor = _spriteRenderer.color;
+
+        //Actual Speed:
+        _currentMoveSpeed = _playerMoveSpeed;
     }
 
     void OnEnable()
@@ -45,7 +51,7 @@ public class PlayerController : MonoBehaviour
         _inputActions = new InputSystem_Actions();
         _inputActions.Player.Jump.performed += Jump;
         _inputActions.Player.Sprint.performed += Sprinting;
-        //_inputActions.Player.Sprint.performed += NotSprinting;
+        _inputActions.Player.Sprint.canceled += StopSprint;
         _inputActions.Enable();
 
     }
@@ -54,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         _inputActions.Player.Jump.performed -= Jump;
         _inputActions.Player.Sprint.performed -= Sprinting;
-        //_inputActions.Player.Sprint.performed -= NotSprinting;
+        _inputActions.Player.Sprint.canceled -= StopSprint;
         _inputActions.Disable();
     }
 
@@ -62,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded)
         {
-            _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, playerJumpForce);
+            _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, _playerJumpForce);
             PlayerAudio.Instance.playSoundOnJump();
         }
 
@@ -76,30 +82,36 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded)
         {
-            playerMoveSpeed = Mathf.Min(playerMoveSpeed + sprintSpeed , maxSprintSpeed);
+            _playerMoveSpeed = Mathf.Min(_playerMoveSpeed + _sprintSpeed , _maxSprintSpeed);
             PlayerAudio.Instance.playSoundOnSprint();
 
-            // if (_spriteRenderer != null)
-            // {
-            //     _spriteRenderer.color = _sprintColor;
-            // }
+            if (_spriteRenderer != null)
+            {
+                _spriteRenderer.color = _sprintColor;
+               // _spriteRenderer.color = Color.yellow;
+            }
+
         }
-        
     }
 
-    // void NotSprinting(InputAction.CallbackContext context)
-    // {
-    //     if (_spriteRenderer != null)
-    //     {
-    //         _spriteRenderer.color = _defaultColor;
-    //     }
-    // }
+
+
+    void StopSprint(InputAction.CallbackContext context)
+    {
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.color = _defaultColor;
+        }
+
+        //reset speed back to normal
+
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Obstacles"))
         {
-            playerMoveSpeed = -5;
+            _playerMoveSpeed = -5;
         }
     }
     void FixedUpdate()
@@ -108,6 +120,6 @@ public class PlayerController : MonoBehaviour
         _isGrounded = Physics2D.OverlapCircle (_groundCheck.position, _groundCheckRadius, _groundLayer);
         
         //For the Player to continue the Auto-Run throughout the game:
-        _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_playerMoveSpeed, _rigidbody2D.linearVelocity.y);
     }
 }
