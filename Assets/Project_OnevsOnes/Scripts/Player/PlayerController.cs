@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
             if (_spriteRenderer != null)
             {
                 _spriteRenderer.color = _sprintColor;
-               // _spriteRenderer.color = Color.yellow;
+                // _spriteRenderer.color = Color.yellow;
             }
 
         }
