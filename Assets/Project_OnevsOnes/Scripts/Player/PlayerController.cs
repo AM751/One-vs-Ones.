@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour
             if (_spriteRenderer != null)
             {
                 _spriteRenderer.color = _sprintColor;
-                // _spriteRenderer.color = Color.yellow;
             }
 
         }
@@ -102,8 +101,6 @@ public class PlayerController : MonoBehaviour
         {
             _spriteRenderer.color = _defaultColor;
         }
-
-        //reset speed back to normal
 
     }
 
