@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyRun : MonoBehaviour
 {
-    [SerializeField] public float playerMoveSpeed;
-    [SerializeField] public float playerJumpForce;
+    [SerializeField] private float _enemyMoveSpeed;
+    //[SerializeField] private float _enemyJumpForce;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
     
@@ -16,15 +16,11 @@ public class EnemyRun : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         Time.timeScale = 1;
     }
-    void Start()
-    {
-        //playerMoveSpeed = 0f;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        _rigidbody2D.linearVelocity = new Vector2(playerMoveSpeed, _rigidbody2D.linearVelocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_enemyMoveSpeed, _rigidbody2D.linearVelocity.y);
         
     }
 
