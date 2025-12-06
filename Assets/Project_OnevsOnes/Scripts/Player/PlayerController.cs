@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Effects.")]
     [SerializeField] private ParticleSystem _playerJumpEffect;
 
-    private Coroutine _sprintCoroutine;
+    //private Coroutine _sprintCoroutine;
     private float _currentMoveSpeed;
     void Awake()
     {
@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
         _inputActions.Player.Sprint.performed += Sprinting;
         _inputActions.Player.Sprint.canceled += StopSprint;
         _inputActions.Enable();
-
     }
 
     private void OnDisable()
@@ -77,7 +76,7 @@ public class PlayerController : MonoBehaviour
             _playerJumpEffect.Play();
         }
     }
-
+    
     void Sprinting(InputAction.CallbackContext context)
     {
         if (_isGrounded)
@@ -93,8 +92,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
+    
     void StopSprint(InputAction.CallbackContext context)
     {
         if (_spriteRenderer != null)
@@ -103,7 +101,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Obstacles"))
@@ -111,6 +109,7 @@ public class PlayerController : MonoBehaviour
             _playerMoveSpeed = -5;
         }
     }
+    
     void FixedUpdate()
     {
         //For the Player to check the ground platform:
