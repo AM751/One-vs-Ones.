@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,10 +18,17 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
     private SpriteRenderer _spriteRenderer;
-    private Color _defaultColor;
+    private Color _defaultSpriteColor;
+    private Light2D _defaultLight;
     
-    [Header("System Feedback Visuals.")]
+    [Header("System Feedback Visuals and Light Effects.")]
     [SerializeField] private Color _sprintColor;
+    [SerializeField] private Light2D _sprintEffectLight;
+    [SerializeField] private Color _sprintLightColor;
+    [SerializeField] private float _lightFadeDuration;
+    
+    private Color _defaultLightColor;
+    private Coroutine _lightFadeCoroutine;
     
     [Header ("Ground Check Zone.")]
     [SerializeField] private Transform _groundCheck;
@@ -32,18 +40,24 @@ public class PlayerController : MonoBehaviour
     
     [Header("Effects.")]
     [SerializeField] private ParticleSystem _playerJumpEffect;
-
-    //private Coroutine _sprintCoroutine;
+    
+    
     private float _currentMoveSpeed;
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _defaultColor = _spriteRenderer.color;
+        _defaultSpriteColor = _spriteRenderer.color;
 
         //Actual Speed:
         _currentMoveSpeed = _playerMoveSpeed;
+        
+        //Light Effect:
+        if (_sprintEffectLight != null)
+        {
+            _defaultLight = _sprintEffectLight.GetComponent<Light2D>();
+        }
     }
 
     void OnEnable()
@@ -89,17 +103,44 @@ public class PlayerController : MonoBehaviour
                 _spriteRenderer.color = _sprintColor;
             }
 
+            UpdateLightColor(_sprintLightColor);
         }
     }
 
+    private void UpdateLightColor(Color color)
+    {
+        if (_sprintEffectLight == null) return;
+
+        if (_lightFadeCoroutine != null)
+        {
+            StopCoroutine(_lightFadeCoroutine);
+        }
+        
+        _lightFadeCoroutine = StartCoroutine(FadeLightRoutine (color, _lightFadeDuration));
+    }
     
     void StopSprint(InputAction.CallbackContext context)
     {
         if (_spriteRenderer != null)
         {
-            _spriteRenderer.color = _defaultColor;
+            _spriteRenderer.color = _defaultSpriteColor;
         }
 
+    }
+
+    private IEnumerator FadeLightRoutine(Color color, float duration)
+    {
+        Color startColor = _sprintEffectLight.color;
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            _sprintEffectLight.color = Color.Lerp(startColor, color, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        _sprintEffectLight.color = color;
     }
     
     private void OnCollisionEnter2D(Collision2D other)

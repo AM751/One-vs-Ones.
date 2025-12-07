@@ -56,6 +56,7 @@ public class PlayerHealth : MonoBehaviour
           
           HealthUpdate();
 
+          
           if (_currentHealth == 0)
           {
               gameEndCanvas.enabled = true;
