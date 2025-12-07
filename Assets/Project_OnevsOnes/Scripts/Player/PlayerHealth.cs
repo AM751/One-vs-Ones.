@@ -7,14 +7,11 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Player Health")] 
-    [SerializeField] public GameObject player;
+    [SerializeField] private GameObject _player;
     [SerializeField] private int _maxHealth = 100;
     [SerializeField] private int _currentHealth;
     [SerializeField] private float _damage;
     [SerializeField] public Canvas gameEndCanvas;
-    
-    [Header("Player Obstacle")]
-    [SerializeField] private GameObject _playerObstacle;
 
     [Header("Player Damage")] 
     [SerializeField] public TextMeshProUGUI playerDamageText;
@@ -27,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == _player)
         {
             TakeDamage();
             HealthUpdate();
@@ -69,6 +66,13 @@ public class PlayerHealth : MonoBehaviour
          if (playerDamageText != null)
          {
              playerDamageText.text = $"HEALTH : {_currentHealth}";
+             
+             PlayerController controller = _player.GetComponent<PlayerController>();
+
+             if (controller != null)
+             {
+                 controller.enabled = false;
+             }
          }
      }
 }

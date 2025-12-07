@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _sprintSpeed;
     [SerializeField] private float _maxSprintSpeed;
     [SerializeField] private float _sprintSeconds;
+    [SerializeField] private GameObject _obstacle;
     
     
     [Header("Player Components.")]
@@ -145,7 +146,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Obstacles"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             _playerMoveSpeed = -5;
         }
