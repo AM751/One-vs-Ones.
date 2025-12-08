@@ -10,9 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _playerMoveSpeed;
     [SerializeField] private float _playerJumpForce;
     [SerializeField] private float _sprintSpeed;
+    [SerializeField] private float _sprintAccelaration;
+    [SerializeField] private float _sprintDeceleration;
     [SerializeField] private float _maxSprintSpeed;
     [SerializeField] private float _sprintSeconds;
     [SerializeField] private GameObject _obstacle;
+    private bool _isSprinting;
     
     
     [Header("Player Components.")]
@@ -65,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.Player.Jump.performed += Jump;
+        
         _inputActions.Player.Sprint.performed += Sprinting;
         _inputActions.Player.Sprint.canceled += StopSprint;
         _inputActions.Enable();
@@ -96,6 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded)
         {
+            _isSprinting = true;
             _playerMoveSpeed = Mathf.Min(_playerMoveSpeed + _sprintSpeed , _maxSprintSpeed);
             PlayerAudio.Instance.playSoundOnSprint();
 
@@ -122,6 +127,7 @@ public class PlayerController : MonoBehaviour
     
     void StopSprint(InputAction.CallbackContext context)
     {
+        _isSprinting = false;
         if (_spriteRenderer != null)
         {
             _spriteRenderer.color = _defaultSpriteColor;
@@ -157,7 +163,14 @@ public class PlayerController : MonoBehaviour
         //For the Player to check the ground platform:
         _isGrounded = Physics2D.OverlapCircle (_groundCheck.position, _groundCheckRadius, _groundLayer);
         
+        float targetSpeed = _isGrounded ? _sprintSpeed : _playerMoveSpeed;
+        
+        float currentRate = _isGrounded ? _sprintAccelaration : _sprintDeceleration;
+        
+        //Accelaration Part:
+        _currentMoveSpeed = Mathf.MoveTowards (_currentMoveSpeed, targetSpeed, currentRate * Time.fixedDeltaTime );
+        
         //For the Player to continue the Auto-Run throughout the game:
-        _rigidbody2D.linearVelocity = new Vector2(_playerMoveSpeed, _rigidbody2D.linearVelocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_currentMoveSpeed, _rigidbody2D.linearVelocity.y);
     }
 }
