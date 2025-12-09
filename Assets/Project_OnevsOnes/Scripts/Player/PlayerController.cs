@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _obstacle;
     private bool _isSprinting;
     
+    [Header("Player's Speed Check.")]
+    [SerializeField] private float _currentMoveSpeed;
     
     [Header("Player Components.")]
     private Rigidbody2D _rigidbody2D;
@@ -45,8 +48,6 @@ public class PlayerController : MonoBehaviour
     [Header("Effects.")]
     [SerializeField] private ParticleSystem _playerJumpEffect;
     
-    
-    private float _currentMoveSpeed;
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
         if (_isGrounded)
         {
             _isSprinting = true;
-            _playerMoveSpeed = Mathf.Min(_playerMoveSpeed + _sprintSpeed , _maxSprintSpeed);
+           // _playerMoveSpeed = Mathf.Min(_playerMoveSpeed + _sprintSpeed , _maxSprintSpeed);
             PlayerAudio.Instance.playSoundOnSprint();
 
             if (_spriteRenderer != null)
@@ -161,30 +162,30 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //For the Player to check the ground platform:
-        if (_groundCheck != null)
-        {
+        //if (_groundCheck != null)
+        //{
             _isGrounded = Physics2D.OverlapCircle (_groundCheck.position, _groundCheckRadius, _groundLayer);
-        }
+       // }
         
         
-        float targetSpeed = _isSprinting ? _sprintSpeed : _playerMoveSpeed;
+        float targetSpeed = _isSprinting ? _maxSprintSpeed : _playerMoveSpeed;
         
-        bool isSpeedingUp = _currentMoveSpeed < targetSpeed;
+        //bool isSpeedingUp = _currentMoveSpeed < targetSpeed;
 
-        float currentRate; //_isGrounded ? _sprintAccelaration : _sprintDeceleration;
+        float currentRate = _isSprinting ? _sprintAccelaration : _sprintDeceleration;
 
-        if (isSpeedingUp)
-        {
-            currentRate = _sprintAccelaration;
-        }
-
-        else
-        {
-            currentRate = _sprintDeceleration;
-        }
+        // if (isSpeedingUp)
+        // {
+        //     currentRate = _sprintAccelaration;
+        // }
+        //
+        // else
+        // {
+        //     currentRate = _sprintDeceleration;
+        // }
         
         //Accelaration Part:
-        _currentMoveSpeed = Mathf.MoveTowards (_currentMoveSpeed, targetSpeed, currentRate * Time.fixedDeltaTime );
+        _currentMoveSpeed = Mathf.MoveTowards (_currentMoveSpeed, targetSpeed,currentRate * Time.fixedDeltaTime );
         
         //For the Player to continue the Auto-Run throughout the game:
         _rigidbody2D.linearVelocity = new Vector2(_currentMoveSpeed, _rigidbody2D.linearVelocity.y);
