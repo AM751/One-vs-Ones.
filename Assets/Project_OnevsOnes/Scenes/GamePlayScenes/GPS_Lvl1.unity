@@ -1243,12 +1243,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849ae9ec3d24f47d48b9776592c0d529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMoveSpeed: 7
+  _playerMoveSpeed: 10
   _playerJumpForce: 7
   _sprintSpeed: 15
   _sprintAccelaration: 10
   _sprintDeceleration: 20
-  _maxSprintSpeed: 1000
+  _maxSprintSpeed: 20
   _sprintSeconds: 2
   _obstacle: {fileID: 9166983477737434854, guid: ae123a74722494509a0a7aa11976c96f, type: 3}
   _sprintColor: {r: 0.12335349, g: 0.13743322, b: 0.26415092, a: 1}
@@ -2315,8 +2315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92aecb8b0a2548acbe60421780e48c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMoveSpeed: 5
+  _enemyMoveSpeed: 8
   _enemyJumpForce: 6
+  _speedIncreaseRate: 0.3
+  _maxSpeed: 20
   _groundCheck: {fileID: 647438414}
   _groundCheckRadius: 0.2
   _groundLayer:
@@ -3783,7 +3785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1896382739
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ public class EnemyRun : MonoBehaviour
 {
     [SerializeField] private float _enemyMoveSpeed;
     [SerializeField] private float _enemyJumpForce;
+    [SerializeField] private float _speedIncreaseRate;
+    [SerializeField] private float _maxSpeed;
     //[SerializeField] public GameObject obstacle;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded;
@@ -41,8 +43,9 @@ public class EnemyRun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rigidbody2D.linearVelocity = new Vector2(_enemyMoveSpeed, _rigidbody2D.linearVelocity.y);
+        _enemyMoveSpeed = Mathf.MoveTowards(_enemyMoveSpeed, _maxSpeed, _speedIncreaseRate * Time.deltaTime);
         
+        _rigidbody2D.linearVelocity = new Vector2(_enemyMoveSpeed, _rigidbody2D.linearVelocity.y);
     }
 
     void FixedUpdate()
