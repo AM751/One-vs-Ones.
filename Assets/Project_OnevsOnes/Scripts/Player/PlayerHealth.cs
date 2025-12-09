@@ -56,6 +56,13 @@ public class PlayerHealth : MonoBehaviour
           
           if (_currentHealth == 0)
           {
+              PlayerController controller = _player.GetComponent<PlayerController>();
+             
+              //If the player's Health is 0, then they can't give any inputs furthermore.
+              if (controller != null)
+              {
+                  controller.enabled = false;
+              }
               gameEndCanvas.enabled = true;
               Time.timeScale = 0;
           }
@@ -66,13 +73,6 @@ public class PlayerHealth : MonoBehaviour
          if (playerDamageText != null)
          {
              playerDamageText.text = $"HEALTH : {_currentHealth}";
-             
-             PlayerController controller = _player.GetComponent<PlayerController>();
-
-             if (controller != null)
-             {
-                 controller.enabled = false;
-             }
          }
      }
 }

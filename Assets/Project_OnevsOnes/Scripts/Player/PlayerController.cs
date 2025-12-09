@@ -152,20 +152,36 @@ public class PlayerController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (other.gameObject.CompareTag("Obstacles"))
         {
-            _playerMoveSpeed = -5;
+            _currentMoveSpeed = -5;
         }
     }
     
     void FixedUpdate()
     {
         //For the Player to check the ground platform:
-        _isGrounded = Physics2D.OverlapCircle (_groundCheck.position, _groundCheckRadius, _groundLayer);
+        if (_groundCheck != null)
+        {
+            _isGrounded = Physics2D.OverlapCircle (_groundCheck.position, _groundCheckRadius, _groundLayer);
+        }
         
-        float targetSpeed = _isGrounded ? _sprintSpeed : _playerMoveSpeed;
         
-        float currentRate = _isGrounded ? _sprintAccelaration : _sprintDeceleration;
+        float targetSpeed = _isSprinting ? _sprintSpeed : _playerMoveSpeed;
+        
+        bool isSpeedingUp = _currentMoveSpeed < targetSpeed;
+
+        float currentRate; //_isGrounded ? _sprintAccelaration : _sprintDeceleration;
+
+        if (isSpeedingUp)
+        {
+            currentRate = _sprintAccelaration;
+        }
+
+        else
+        {
+            currentRate = _sprintDeceleration;
+        }
         
         //Accelaration Part:
         _currentMoveSpeed = Mathf.MoveTowards (_currentMoveSpeed, targetSpeed, currentRate * Time.fixedDeltaTime );
