@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
         if (_isGrounded)
         {
             _rigidbody2D.linearVelocity = new Vector2 (_rigidbody2D.linearVelocity.x, _playerJumpForce);
+           
             PlayerAudio.Instance.playSoundOnJump();
         }
 
