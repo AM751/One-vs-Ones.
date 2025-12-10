@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxSprintSpeed;
     [SerializeField] private float _sprintSeconds;
     [SerializeField] private GameObject _obstacle;
-    [SerializeField] private float _jumpBoost;
-    [SerializeField] private GameObject _jumpBosstDuration;
-    private bool _jumpBoostActive;
+    //[SerializeField] private float _jumpBoost;
+    //[SerializeField] private GameObject _jumpBosstDuration;
+    //private bool _jumpBoostActive;
     private bool _isSprinting;
 
     
