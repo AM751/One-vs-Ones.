@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
                   controller.enabled = false;
               }
               gameEndCanvas.enabled = true;
-              Time.timeScale = 0;
+              //Time.timeScale = 0;
           }
      }
      

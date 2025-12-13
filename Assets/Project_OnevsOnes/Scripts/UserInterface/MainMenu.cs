@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("GPS_Lvl1");
+        Time.timeScale = 1;
     }
 
     public void goToInstructions()
