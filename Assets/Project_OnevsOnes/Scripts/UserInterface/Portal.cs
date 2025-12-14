@@ -4,7 +4,7 @@ public class Portal : MonoBehaviour
 {
     public void RunPhase()
     {
-        SceneManager.LoadScene("GPS_Lvl2");
+        SceneManager.LoadScene("");
         Time.timeScale = 1;
     }
 }

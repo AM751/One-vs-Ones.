@@ -52,6 +52,6 @@ public class LevelLoopGenerator : MonoBehaviour
         spawnXPosition += segmentLength;
 
         
-        currentSegmentIndex = (currentSegmentIndex + 1) % segmentPrefabs.Length;
+        currentSegmentIndex = (currentSegmentIndex + 1) % segmentPrefabs.Length; //Random.Range(0, segmentPrefabs.Length);
     }
 }
