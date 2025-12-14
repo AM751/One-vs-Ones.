@@ -17,12 +17,12 @@ public class LevelBeaten : MonoBehaviour
             _levelBeatenCanvas.enabled = true;
             Time.timeScale = 0;
             
-            PlayerController controller = _player.GetComponent<PlayerController>();
-
-            if (controller != null)
-            {
-                controller.enabled = false;
-            }
+            // PlayerController controller = _player.GetComponent<PlayerController>();
+            //
+            // if (controller != null)
+            // {
+            //     controller.enabled = false;
+            // }
         }
     }
 }
