@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _sprintAccelaration;
     [SerializeField] private float _sprintDeceleration;
     [SerializeField] private float _maxSprintSpeed;
+    private bool _wasSprinting = false;
 
     [Header("System Connections")]
     
@@ -161,9 +162,17 @@ public class PlayerController : MonoBehaviour
         {
             healthMultiplier = 0.6f; 
         }
-
         
         bool isSprinting = _isSprintingInput && !_staminaSystem.isExhausted;
+        
+        if (isSprinting && !_wasSprinting)
+        {
+            if (PlayerAudio.Instance != null)
+            {
+                PlayerAudio.Instance.playSoundOnSprint();
+            }
+        }
+        _wasSprinting = isSprinting;
 
         float targetSpeed = _playerMoveSpeed;
 

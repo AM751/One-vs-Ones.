@@ -18,6 +18,7 @@ public class NextLevel : MonoBehaviour
         if (collision.gameObject == _player)
         {
             _runAccomplishedCanvas.enabled = true;
+            Time.timeScale = 0;
         }
     }
 }

@@ -35,9 +35,11 @@ public class Obstacle : MonoBehaviour
         {
             stamina.InstantDrain(staminaDamage);
         }
-
-        // 3. Destroy Obstacle (Optional)
-        // If I want the obstacle to disappear after hitting it:
-        // Destroy(gameObject);
+        
+        //Player collide Audio:
+        if (PlayerAudio.Instance != null)
+        {
+            PlayerAudio.Instance.playSoundOnObjectCollide();
+        }
     }
 }
