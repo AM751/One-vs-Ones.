@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Player Health")] 
     [SerializeField] private GameObject _player;
     [SerializeField] private int _maxHealth = 100;
-    [SerializeField] private int _currentHealth;
+    [SerializeField] public int _currentHealth;
     [SerializeField] private float _damage;
     [SerializeField] public Canvas gameEndCanvas;
 
