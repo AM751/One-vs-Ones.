@@ -1670,9 +1670,6 @@ MonoBehaviour:
   _sprintAccelaration: 25
   _sprintDeceleration: 20
   _maxSprintSpeed: 2000
-  _sprintSeconds: 2
-  _obstacle: {fileID: 9166983477737434854, guid: ae123a74722494509a0a7aa11976c96f, type: 3}
-  _currentMoveSpeed: 0
   _sprintColor: {r: 0.12335349, g: 0.13743322, b: 0.26415092, a: 1}
   _sprintEffectLight: {fileID: 0}
   _sprintLightColor: {r: 1, g: 0.6462264, b: 0.96199125, a: 0}
@@ -1833,7 +1830,7 @@ MonoBehaviour:
   staminaSlider: {fileID: 392954141}
   fillImage: {fileID: 1093778620}
   normalColor: {r: 0, g: 1, b: 1, a: 1}
-  exhaustedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  exhaustedColor: {r: 0.7075472, g: 0.07676221, b: 0.07676221, a: 1}
   isExhausted: 0
 --- !u!1001 &438842279
 PrefabInstance:

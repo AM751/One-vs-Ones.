@@ -1,83 +1,43 @@
-using System;
 using UnityEngine;
-using UnityEngine.Rendering;
-using Random = System.Random;
 
 public class Obstacle : MonoBehaviour
 {
-    [Header("Player Damage")]
-    [SerializeField] private GameObject _player;
-    [SerializeField] private int _obstacleDamageTaken;
-    
-    [Header("Player Particle Effect.")]
-    [SerializeField] private ParticleSystem _playerCollidedParticles; 
-    
-    [Header("Player Knockback Instruction.")]
-    [SerializeField] private Canvas _playerKnockbackInstructionCanvas;
-    private bool _isPlayerKnockedBackInstructionActive = false;
-    
-    
+    [Header("System Damage Settings")]
+    public int healthDamage = 20;   
+    public float staminaDamage = 30f; 
 
-    private void Start()
-    {
-        if (_playerKnockbackInstructionCanvas != null)
-        {
-            _playerKnockbackInstructionCanvas.enabled = false;
-        }
-    }
     
-
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_isPlayerKnockedBackInstructionActive)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                KnockBackInstructionDisable();
-            }
-        }
+        HandleHit(other.gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject == _player)
-        {
-            Vector2 collidingObstacle = other.GetContact(0).point;
-            Instantiate(_playerCollidedParticles, collidingObstacle, Quaternion.identity);
-            PlayerAudio.Instance.playSoundOnObjectCollide();
-            KnockBackInstructionEnable();
-        }
-
-        //For Health UI update:
-        if (other.gameObject == _player)
-        {
-            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
-
-            //For taking the damage:
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(_obstacleDamageTaken);
-            }
-        }
-    }
     
-
-    private void KnockBackInstructionEnable()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_playerKnockbackInstructionCanvas != null)
-        {
-            _playerKnockbackInstructionCanvas.enabled = true;
-            _isPlayerKnockedBackInstructionActive = true;
-        }
+        HandleHit(collision.gameObject);
     }
 
-    private void KnockBackInstructionDisable()
+    void HandleHit(GameObject player)
     {
-        if (_playerKnockbackInstructionCanvas != null)
+        // 1. Attack Health System
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        if (health != null)
         {
-            _playerKnockbackInstructionCanvas.enabled = false;
-            _isPlayerKnockedBackInstructionActive = false;
+            health.TakeDamage(healthDamage);
+         
         }
+
+        // 2. Attack Stamina System (The Interconnection)
+       
+        Stamina stamina = player.GetComponent<Stamina>();
+        if (stamina != null)
+        {
+            stamina.InstantDrain(staminaDamage);
+        }
+
+        // 3. Destroy Obstacle (Optional)
+        // If I want the obstacle to disappear after hitting it:
+        // Destroy(gameObject);
     }
-    
 }
