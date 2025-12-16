@@ -1533,7 +1533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.39922222}
   m_AnchorMax: {x: 0.5, y: 0.39922222}
-  m_AnchoredPosition: {x: 0, y: 65.927826}
+  m_AnchoredPosition: {x: 77, y: 7.927826}
   m_SizeDelta: {x: 1644, y: 461}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424307489
@@ -1556,11 +1556,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'JUMP- Spacebar has to be pressed.
+  m_text: 'SPACE BAR: JUMP
 
 
-    SPRINT- LEFT-SHIFT has to be rapidly
-    pressed.'
+    LEFT-SHIFT:Rapid/Long press for SPRINT.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c4f3e6c25f64e2e8271e38a335025d, type: 2}
   m_sharedMaterial: {fileID: 1439003551320218042, guid: b9c4f3e6c25f64e2e8271e38a335025d, type: 2}
@@ -1593,7 +1592,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1625,7 +1624,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -174.63013, y: 0, z: -49.019043, w: 39.82794}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

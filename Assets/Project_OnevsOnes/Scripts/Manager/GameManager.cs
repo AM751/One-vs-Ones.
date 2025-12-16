@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
         timeSurvived += Time.deltaTime;
 
-        // --- EVOLUTION MECHANIC (Rubric: 3 Distinct Phases) ---
+        
         if (currentPhase == 1 && timeSurvived > phase2Time)
         {
             SetPhase(2);
@@ -51,16 +51,16 @@ public class GameManager : MonoBehaviour
     void SetPhase(int phase)
     {
         currentPhase = phase;
-        // Interconnection: Time affects Difficulty
+       
         if (phase == 2)
         {
-            globalSpeedMultiplier = 1.2f; // 20% Faster
+            globalSpeedMultiplier = 1.2f; 
             staminaDrainMultiplier = 1.2f; 
             Debug.Log("PHASE 2: SPEED UP");
         }
         else if (phase == 3)
         {
-            globalSpeedMultiplier = 1.4f; // 40% Faster
+            globalSpeedMultiplier = 1.4f; 
             staminaDrainMultiplier = 1.5f; 
             Debug.Log("PHASE 3: SURVIVAL");
         }
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     public void EndGame(string reason)
     {
         isGameActive = false;
-        // --- DATA LOGGING (Rubric: Tracked Metrics) ---
+        
         string line = $"{timeSurvived},{currentPhase},{reason},{globalSpeedMultiplier}\n";
         File.AppendAllText(logPath, line);
         Debug.Log("Metrics Saved.");
