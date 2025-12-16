@@ -1128,6 +1128,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6200571207265826617, guid: ae123a74722494509a0a7aa11976c96f, type: 3}
   m_PrefabInstance: {fileID: 134682373}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &425832415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425832417}
+  - component: {fileID: 425832416}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &425832416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425832415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4df7f63425f34fb59d4e235fd3acd72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  timeSurvived: 0
+  currentPhase: 1
+  isGameActive: 1
+  phase2Time: 30
+  phase3Time: 60
+  globalSpeedMultiplier: 1
+  staminaDrainMultiplier: 1
+--- !u!4 &425832417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425832415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432155879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5939,3 +5990,4 @@ SceneRoots:
   - {fileID: 1964489628}
   - {fileID: 1310435604}
   - {fileID: 1101186055}
+  - {fileID: 425832417}
