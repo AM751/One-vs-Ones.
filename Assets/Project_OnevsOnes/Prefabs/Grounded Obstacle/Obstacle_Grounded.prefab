@@ -127,7 +127,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.04, y: 0}
+  m_Offset: {x: -0.01, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,10 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81554956dbe0340edafa070395a2129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _obstacleDamageTaken: 5
-  _playerCollidedParticles: {fileID: 1728395288471904285, guid: bfca0b97ae2b1450bbc6ef5612d25a05, type: 3}
-  _playerKnockbackInstructionCanvas: {fileID: 0}
+  healthDamage: 20
+  staminaDamage: 30
 --- !u!114 &3820481248737577585
 MonoBehaviour:
   m_ObjectHideFlags: 0
